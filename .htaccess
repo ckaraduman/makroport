@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteBase /
+
+# Tüm istekleri router.php'ye yönlendirin
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ router.php [QSA,L]
+Options -indexes
