@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /
+
+# Mevcut dosya veya dizinlere yönlendirme yapma
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+
+# Tüm istekleri route.php'ye yönlendir
+RewriteRule ^(.*)$ route.php?url=$1 [QSA,L]
+
+# Kök dizin isteğini route.php'ye yönlendir
+RewriteRule ^$ route.php?url=/ [L]
