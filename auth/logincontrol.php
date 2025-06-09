@@ -15,15 +15,21 @@ $stmt->execute([$email]);
 $user = $stmt->fetch();
 
 if ($user && password_verify($password, $user['password'])) {
+    // E-posta doğrulaması kontrolü
+    if ((int)$user['is_verified'] !== 1) {
+        // Kullanıcının e-postası doğrulanmamışsa girişe izin verme
+        header('Location: /verify');
+        exit;
+    }
+
+    // Kullanıcı doğrulandıysa oturum başlat
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['email'] = $user['email'];
 
-    // Beni hatırla seçildiyse cookie ayarla
+    // "Beni hatırla" seçildiyse cookie ayarla
     if (!empty($_POST['remember'])) {
-        // Güvenlik için sadece email saklıyoruz. Süre: 30 gün
         setcookie('remember_email', $email, time() + (86400 * 30), "/", "", false, true);
     } else {
-        // Eğer checkbox işaretli değilse, daha önceki cookie'yi sil
         if (isset($_COOKIE['remember_email'])) {
             setcookie('remember_email', '', time() - 3600, "/", "", false, true);
         }
@@ -35,3 +41,4 @@ if ($user && password_verify($password, $user['password'])) {
     header('Location: /login?error=Hatalı giriş');
     exit;
 }
+

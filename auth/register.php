@@ -1,5 +1,12 @@
 <?php
 require './config/db.php';
+require './lib/PHPMailer/PHPMailer.php';
+require './lib/PHPMailer/SMTP.php';
+require './lib/PHPMailer/Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 
 $hata = '';
 $ok = false;
@@ -31,10 +38,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result = $stmt->execute([$fullname, $birthdate, $email, $hash, $verification_code]);
 
             if ($result) {
-                $ok = true;
-            } else {
-                $hata = 'Kayıt işlemi sırasında hata oluştu.';
+                $mail = new PHPMailer(true);
+                try {
+                    // Sunucu ayarları
+                    $mail->isSMTP();
+                    $mail->CharSet = 'utf-8';
+                    $mail->Host = 'mail.makroport.com';  // Gmail kullanıyorsanız bu
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'cem@makroport.com'; // GÖNDEREN adres
+                    $mail->Password = 'Cem130371%';       // Gmail'de uygulama şifresi gerekiyor
+                    $mail->SMTPSecure = 'tls'; // TLS kullanımı
+                    $mail->Port = 587;
+
+                    // Alıcı ve içerik
+                    $mail->setFrom('cem@makroport.com', 'MakroPort GameCity');
+                    $mail->addAddress($email, $fullname);
+
+                    $mail->isHTML(true);
+                    $mail->Subject = 'E-posta Doğrulama Kodu';
+                    $mail->Body    = "Merhaba $fullname,<br><br>Doğrulama kodunuz: <strong>$verification_code</strong><br><br>Lütfen bu kodu sisteme girerek hesabınızı onaylayın.";
+                    $mail->SMTPOptions = [
+                        'ssl' => [
+                            'verify_peer' => false,
+                            'verify_peer_name' => false,
+                            'allow_self_signed' => true,
+                        ]
+                    ];
+                    $mail->send();
+                    $ok = true;
+                } catch (Exception $e) {
+                    $hata = 'Mail gönderilemedi. Hata: ' . $mail->ErrorInfo;
+                }
             }
+
         }
     }
 }

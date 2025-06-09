@@ -10,6 +10,7 @@ $routes = [
     'login' => 'auth/login.php',
     'logout' => 'auth/logout.php',
     'logincontrol' => 'auth/logincontrol.php',
+    'verify' => 'auth/verify.php',               // E-posta doğrulama sayfası
     'about' => 'pages/about.php',
     'contact' => 'pages/contact.php',
     'games' => 'pages/games.php',
