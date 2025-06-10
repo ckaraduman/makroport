@@ -1,11 +1,13 @@
 <?php
-$host = 'localhost';
-$db   = 'makroport';
-$user = 'root';
-$pass = '';
-$charset = 'utf8mb4';
+$secrets = require_once __DIR__ . '/../config/secrets.php';
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$host = $secrets['db_host'];
+$name = $secrets['db_name'];
+$user = $secrets['db_user'];
+$pass = $secrets['db_pass'];
+$charset = $secrets['db_charset'];
+
+$dsn = "mysql:host=$host;dbname=$name;charset=$charset";
 
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,

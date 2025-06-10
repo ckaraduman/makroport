@@ -7,7 +7,6 @@ require './lib/PHPMailer/Exception.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-
 $hata = '';
 $ok = false;
 
@@ -42,13 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 try {
                     // Sunucu ayarları
                     $mail->isSMTP();
-                    $mail->CharSet = 'utf-8';
-                    $mail->Host = 'mail.makroport.com';  // Gmail kullanıyorsanız bu
+                    $mail->CharSet = $secrets['mail_charset'];
+                    $mail->Host = $secrets['mail_host'];
                     $mail->SMTPAuth = true;
-                    $mail->Username = 'cem@makroport.com'; // GÖNDEREN adres
-                    $mail->Password = 'Cem130371%';       // Gmail'de uygulama şifresi gerekiyor
-                    $mail->SMTPSecure = 'tls'; // TLS kullanımı
-                    $mail->Port = 587;
+                    $mail->Username = $secrets['mail_username']; 
+                    $mail->Password = $secrets['mail_password']; 
+                    $mail->SMTPSecure = $secrets['mail_smtp_secure']; // 'tls' veya 'ssl'
+                    $mail->Port = $secrets['mail_port']; // 587 veya 465
+
+                    
 
                     // Alıcı ve içerik
                     $mail->setFrom('cem@makroport.com', 'MakroPort GameCity');
