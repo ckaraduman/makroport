@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $mail->addAddress($email, $fullname);
 
                     $mail->isHTML(true);
-                    $mail->Subject = 'E-posta Doğrulama Kodu';
+                    $mail->Subject = 'E-posta Kodu';
                     $mail->Body    = "Merhaba $fullname,<br><br>Doğrulama kodunuz: <strong>$verification_code</strong><br><br>Lütfen bu kodu sisteme girerek hesabınızı onaylayın.";
                     $mail->SMTPOptions = [
                         'ssl' => [
