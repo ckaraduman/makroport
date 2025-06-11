@@ -1,8 +1,14 @@
 <?php
 require './config/db.php';
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $hata = 'Mail adresiniz henüz doğrulanmamış, lütfen kayıt sırasında kullandığınız mail adresinizi kontrol ederek mail adresinizi ve MakroPort tarafından iletilen doğrulama kodunu girin.';
 $ok = false;
+
+$email_value = $_POST['email'] ?? ($_SESSION['verify_email'] ?? '');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
@@ -20,7 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user) {
             $update = $pdo->prepare("UPDATE users SET is_verified = 1, verification_code = NULL WHERE id = ?");
             $update->execute([$user['id']]);
+            $_SESSION['verify_email'] = $email;
+            $_SESSION['remember_email'] = $email; // 🔄 Giriş ekranına taşıma
             $ok = true;
+            if ($ok) {
+            unset($_SESSION['verify_email']);
+        }
+            $hata = '';
         } else {
             $hata = 'Doğrulama kodu geçersiz veya hesap zaten doğrulanmış.';
         }
@@ -56,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="mb-3">
                 <label for="email" class="form-label">E-posta</label>
                 <input type="email" name="email" id="email" class="form-control" required
-                       value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+                        value="<?= htmlspecialchars($email_value) ?>">
             </div>
 
             <div class="mb-3">

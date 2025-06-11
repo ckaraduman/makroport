@@ -67,11 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ];
                     $mail->send();
                     $ok = true;
+                    // ✅ E-posta gönderildi, artık yönlendirme zamanı
+                    $_SESSION['verify_email'] = $email;
+                    header('Location: /verify');
+                    exit;
                 } catch (Exception $e) {
                     $hata = 'Mail gönderilemedi. Hata: ' . $mail->ErrorInfo;
                 }
             }
-
         }
     }
 }
