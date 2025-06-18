@@ -112,3 +112,11 @@ h1 {
     width: 110px;
 }
 
+@media (max-width: 600px) {
+  .keyboard-key {
+    font-size: 16px;
+    padding: 0 6px;
+    height: 45px;
+  }
+}
+
