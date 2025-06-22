@@ -13,7 +13,7 @@ body {
     background: #ffffff;
     padding: 30px;
     margin-top: 50px;
-    margin-left: 150px;
+    /* margin-left: 150px; */
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
     width: 100%;
@@ -110,7 +110,7 @@ h1 {
 
 .keyboard-key.wide {
     flex: 2 0 auto;
-    width: 110px;
+    /* width: 110px; */
 }
 
 @media (max-width: 600px) {
