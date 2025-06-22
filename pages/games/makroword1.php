@@ -19,7 +19,7 @@ $kelime = getDailyWord(); // Günlük kelimeyi al
 
 <div class="game-container">
     <h1>MakroWord</h1>
-    <p class="subtitle">Günün kelimesini 6 tahminde bul!</p>
+    <p class="subtitle">Günün kelimesini 6 tahminde bulmaya çalışın!</p>
 
     <div id="board" class="board"></div>
     <div id="keyboard" class="keyboard"></div>
