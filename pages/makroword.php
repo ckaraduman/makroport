@@ -7,7 +7,9 @@
     <title>MakroPort - MakroWord</title>
 </head>
 <body>
-    <div class="box">CEM KARADUMAN</div>
+    <div class="box">English Word-1</div>
+    <div class="box">English Word-2</div>
+
     <script src="assets/js/script.js"></script>
 </body>
 </html>
