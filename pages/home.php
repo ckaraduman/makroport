@@ -28,12 +28,25 @@ Ayrıca, ihtiyaçlarınıza özel olarak tasarlanmış yazılım uygulamalarıyl
 ?>
 <div class="container">
 <h2>MakroPort – Yeni Çözüm Ortağınız</h2>
+<hr>
 <?php if (isset($_SESSION['user_id'])): ?>
 <p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['email']) ?></p>
-<p style="text-align: justify;"><?php echo $message ?></p>
-<img src="assets/img/team.png" alt="Takım Resmi" class="img-fluid mb-4" style="max-width: 100%; height: auto;">
+    <div class="row align-items-start">
+        <div class="col-md-6">
+            <p style="text-align: justify;"><?php echo nl2br($message); ?></p>
+        </div>
+        <div class="col-md-6">
+            <img src="assets/img/team.png" alt="Takım Resmi" class="img-fluid rounded shadow" style="max-width: 100%; height: auto;">
+        </div>
+    </div>
 <?php else: ?>
-<p style="text-align: justify;"><?php echo $message ?></p>
-<img src="assets/img/team.png" alt="Takım Resmi" class="img-fluid mb-4" style="max-width: 100%; height: auto;">
+    <div class="row align-items-start">
+        <div class="col-md-6">
+            <p style="text-align: justify;"><?php echo nl2br($message); ?></p>
+        </div>
+        <div class="col-md-6">
+            <img src="assets/img/team.png" alt="Takım Resmi" class="img-fluid rounded shadow" style="max-width: 100%; height: auto;">
+        </div>
+    </div>
 <?php endif; ?>
 </div>

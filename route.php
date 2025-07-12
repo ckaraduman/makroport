@@ -12,6 +12,7 @@ $routes = [
     'logincontrol' => 'auth/logincontrol.php',
     'verify' => 'auth/verify.php',               // E-posta doğrulama sayfası
     'about' => 'pages/about.php',
+    'software' => 'pages/software.php',
     'course' => 'pages/course.php',
     'blog' => 'pages/blog.php',
     'add' => 'pages/add-quote.php',       // Alıntı ekleme sayfası
