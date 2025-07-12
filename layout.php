@@ -5,7 +5,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>MakroPort GameCity</title>
+    <title>MakroPort</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->

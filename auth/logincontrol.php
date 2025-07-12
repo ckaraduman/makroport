@@ -38,6 +38,7 @@ if ((int)$user['is_verified'] !== 1) {
 // Oturum bilgileri ayarlanıyor
 $_SESSION['user_id'] = $user['id'];
 $_SESSION['email'] = $user['email'];
+$_SESSION['fullname'] = $user['fullname'] ?? '';
 
 // "Beni hatırla" seçeneği
 if (!empty($_POST['remember'])) {
