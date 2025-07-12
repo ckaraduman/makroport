@@ -32,7 +32,6 @@ MakroPort: Yazılımda Basitlik, Entegrasyonda Güç.";
 
 ?>
 <div class="container">
-<h2>MakroPort – Yeni Çözüm Ortağınız</h2>
 <?php if (isset($_SESSION['user_id'])): ?>
 <p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['email']) ?></p>
 <div class="row align-items-start">
