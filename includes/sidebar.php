@@ -1,5 +1,5 @@
 <div>
-    <h4 class="mb-4">Menü</h4>
+    <!-- <h4 class="mb-4">Menü</h4> -->
     <div class="list-group">
         <a href="/" class="list-group-item list-group-item-action">Ana Sayfa</a>
         <a href="/about" class="list-group-item list-group-item-action">Hakkımızda</a>
