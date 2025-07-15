@@ -5,7 +5,7 @@ $content="cemilkerkaraduman@gmail.com";
 <div class="container">
 <h2>İletişim Sayfası</h2>
 <?php if (isset($_SESSION['user_id'])): ?>
-<p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['email']) ?></p>
+<p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['fullname']) ?></p>
 <div class="content col-md-6">
     <p style="text-align: justify;">Bu sayfada iletişim bilgilerinizi ve mesajınızı bırakabilirsiniz. Size en kısa sürede geri dönüş yapacağız.</p>
     <form action="/send-message" method="post">

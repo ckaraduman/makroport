@@ -6,5 +6,5 @@ if (!isset($_SESSION['user_id'])) {
 ?>
 
 <h2>Yazılarım...</h2>
-<p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['email']) ?></p>
+<p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['fullname']) ?></p>
 <p>Burada makaleler ve yazılar yer alacaktır.</p>
