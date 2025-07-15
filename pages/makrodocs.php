@@ -11,7 +11,7 @@ Ayrıca tüm belge süreçlerinde hiyerarşik onay mekanizması ile kontrol ve d
 <h2>MakroPort – Yeni Çözüm Ortağınız</h2>
 <hr>
 <?php if (isset($_SESSION['user_id'])): ?>
-<p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['email']) ?></p>
+<p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['fullname']) ?></p>
     <button type="button" class="btn btn-primary">MakroDocs</button>
 <?php else: ?>
     <div class="row align-items-start">

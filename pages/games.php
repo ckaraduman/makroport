@@ -6,6 +6,6 @@ if (!isset($_SESSION['user_id'])) {
 ?>
 
 <h2>Oyunlar Sayfası</h2>
-<p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['email']) ?></p>
+<p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['fullname']) ?></p>
 
 <a href="/makroword">MakroWord - Kelime Bulma Oyunu</a><br>

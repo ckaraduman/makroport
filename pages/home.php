@@ -58,7 +58,7 @@ Bildirimlerin içeriği ve tetikleme koşulları, sistemde tanımlı onay noktal
 <h2>MakroPort – Yeni Çözüm Ortağınız</h2>
 <hr>
 <?php if (isset($_SESSION['user_id'])): ?>
-<p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['email']) ?></p>
+<p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['fullname']) ?></p>
     <div class="row align-items-start">
         <div class="col-md-6">
             <p style="text-align: justify;"><?php echo nl2br($message1); ?></p>

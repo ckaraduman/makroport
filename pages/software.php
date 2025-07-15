@@ -33,7 +33,7 @@ MakroPort: Yazılımda Basitlik, Entegrasyonda Güç.";
 ?>
 <div class="container">
 <?php if (isset($_SESSION['user_id'])): ?>
-<p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['email']) ?></p>
+<p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['fullname']) ?></p>
 <div class="row align-items-start">
     <div class="col-md-6">
         <img src="assets/img/partner.png" alt="Takım Resmi" class="img-fluid rounded shadow" style="max-width: 100%; height: auto;">
