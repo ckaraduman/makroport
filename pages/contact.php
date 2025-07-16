@@ -1,7 +1,13 @@
 <?php
 include 'auth/session.php';
 $content="cemilkerkaraduman@gmail.com";
-?>
+
+if (isset($_GET['success'])): ?>
+<div class="alert alert-success">
+    Mesajınız başarıyla gönderildi. Teşekkür ederiz.
+</div>
+<?php endif; ?>
+
 <div class="container">
 <h2>İletişim Sayfası</h2>
 <?php if (isset($_SESSION['user_id'])): ?>

@@ -13,7 +13,7 @@ Ayrıca tüm belge süreçlerinde hiyerarşik onay mekanizması ile kontrol ve d
     <hr>
     <?php if (isset($_SESSION['user_id'])): ?>
         <p>Hoş geldiniz, <?= htmlspecialchars($_SESSION['fullname']) ?></p>
-        <button type="button" class="btn btn-primary">MakroDocs</button>
+        <a class="btn btn-primary mb-2" href="/org_reg" role="button">MakroDocs</a>
     <?php else: ?>
         <div class="row align-items-start">
             <!-- Sol taraf: Metin -->
