@@ -1,4 +1,5 @@
 <?php
+// Hataları geçici olarak gösterelim
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -19,46 +20,50 @@ $success = '';
 
 // 1. Kullanıcının bu organizasyona ait olup olmadığını kontrol et
 $stmt = $conn->prepare("
-    SELECT o.* 
+    SELECT o.organization_id, o.organization_name, o.kep_address, o.phone 
     FROM organizations o
     JOIN user_organization uo ON uo.organization_id = o.organization_id
     WHERE uo.user_id = ? AND o.organization_id = ?
 ");
 $stmt->bind_param("ii", $user_id, $org_id);
 $stmt->execute();
-$result = $stmt->get_result();
+$stmt->bind_result($id, $name, $kep, $phone);
 
-if ($result->num_rows === 0) {
-    $error = "Bu organizasyonu düzenlemeye yetkiniz yok.".$org_id.$user_id;
+if ($stmt->fetch()) {
+    $organization = [
+        'organization_id' => $id,
+        'organization_name' => $name,
+        'kep_address' => $kep,
+        'phone' => $phone
+    ];
 } else {
-    $organization = $result->fetch_assoc();
-
-    // Eğer form gönderilmişse (POST)
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $name = trim($_POST['organization_name']);
-        $email = trim($_POST['kep_address']);
-        $phone = trim($_POST['phone']);
-
-        if ($name === '' || $email === '') {
-            $error = 'Lütfen tüm gerekli alanları doldurun.';
-        } else {
-            // Güncelleme işlemi
-            $update = $conn->prepare("UPDATE organizations SET organization_name = ?, kep_address = ?, phone = ? WHERE organization_id = ?");
-            $update->bind_param("sssi", $name, $email, $phone, $org_id);
-            if ($update->execute()) {
-                $success = "Organizasyon bilgileri başarıyla güncellendi.";
-                // Güncel bilgileri tekrar al
-                $organization['organization_name'] = $name;
-                $organization['kep_email'] = $email;
-                $organization['phone'] = $phone;
-            } else {
-                $error = "Güncelleme başarısız: " . $update->error;
-            }
-            $update->close();
-        }
-    }
+    $error = "Bu organizasyonu düzenlemeye yetkiniz yok.";
 }
 $stmt->close();
+
+// Eğer form gönderilmişse (POST)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $organization) {
+    $name = trim($_POST['organization_name']);
+    $email = trim($_POST['kep_address']);
+    $phone = trim($_POST['phone']);
+
+    if ($name === '' || $email === '') {
+        $error = 'Lütfen tüm gerekli alanları doldurun.';
+    } else {
+        $update = $conn->prepare("UPDATE organizations SET organization_name = ?, kep_address = ?, phone = ? WHERE organization_id = ?");
+        $update->bind_param("sssi", $name, $email, $phone, $org_id);
+        if ($update->execute()) {
+            $success = "Organizasyon bilgileri başarıyla güncellendi.";
+            // Güncellenen bilgileri tekrar ata
+            $organization['organization_name'] = $name;
+            $organization['kep_address'] = $email;
+            $organization['phone'] = $phone;
+        } else {
+            $error = "Güncelleme başarısız: " . $update->error;
+        }
+        $update->close();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -103,4 +108,5 @@ $stmt->close();
 </div>
 </body>
 </html>
+
 
