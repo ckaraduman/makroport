@@ -34,7 +34,7 @@ if (!isset($_SESSION['user_id'])) {
 
     <h2>Kurum / Kuruluş / Şirket / Firma Kayıt Ekranı</h2>
 
-    <form method="post" action="organization_register_process.php" enctype="multipart/form-data">
+    <form method="post" action="org_reg_pro" enctype="multipart/form-data">
 
         <label for="organization_name">Kurum / Kuruluş Adı *</label>
         <input type="text" name="organization_name" id="organization_name" required>

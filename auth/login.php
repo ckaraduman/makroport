@@ -45,8 +45,8 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
 
             <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="remember" name="remember"
-                       <?= $remembered_email ? 'checked' : '' ?>>
+                <input type="checkbox" class="form-check-input" id="remember" name="remember" value="1"
+                    <?= $remembered_email ? 'checked' : '' ?>>
                 <label class="form-check-label" for="remember">Beni hatırla</label>
             </div>
 
@@ -64,4 +64,6 @@ if (session_status() === PHP_SESSION_NONE) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
 

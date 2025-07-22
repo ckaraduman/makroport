@@ -40,16 +40,32 @@ $_SESSION['user_id'] = $user['id'];
 $_SESSION['email'] = $user['email'];
 $_SESSION['fullname'] = $user['fullname'] ?? '';
 
+
 // "Beni hatırla" seçeneği
-if (!empty($_POST['remember'])) {
-    setcookie('remember_email', $email, time() + (86400 * 30), "/", "", false, true);
+if (isset($_POST['remember']) && $_POST['remember'] === '1') {
+    $token = bin2hex(random_bytes(32));
+    setcookie('remember_token', $token, time() + (86400 * 30), "/", "", false, true);
+    $stmt = $pdo->prepare("UPDATE users SET remember_token = ? WHERE id = ?");
+    $stmt->execute([$token, $user['id']]);
 } else {
-    if (isset($_COOKIE['remember_email'])) {
-        setcookie('remember_email', '', time() - 3600, "/", "", false, true);
+    // Cookie varsa hem sil hem de veritabanından temizle
+    if (isset($_COOKIE['remember_token'])) {
+        setcookie('remember_token', '', time() - 3600, "/", "", false, true);
     }
+    $stmt = $pdo->prepare("UPDATE users SET remember_token = NULL WHERE id = ?");
+    $stmt->execute([$user['id']]);
+        setcookie(session_name(), session_id(), [
+        'expires' => 0,
+        'path' => '/',
+        'secure' => false,
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
 }
 
 // Anasayfaya yönlendir
 header("Location: /");
 exit;
+
+// Token hem tarayıcıdan hem veritabanından silinsin
 

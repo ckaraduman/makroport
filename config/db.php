@@ -8,6 +8,7 @@ $pass = $secrets['db_pass'];
 $charset = $secrets['db_charset'];
 
 $dsn = "mysql:host=$host;dbname=$name;charset=$charset";
+$conn = new mysqli($host, $user, $pass, $name);
 
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,

@@ -6,7 +6,7 @@
         <a href="/software" class="list-group-item list-group-item-action">Yazılım Çözümleri</a>
         <a href="/makrodocs" class="list-group-item list-group-item-action">MakroDocs</a>
         <a href="/course" class="list-group-item list-group-item-action">Eğitimler</a>
-        <a href="/blog" class="list-group-item list-group-item-action">Yazılar</a>
+        <a href="/blog_list" class="list-group-item list-group-item-action">Yazılar</a>
         <!-- <a href="/list-quotes" class="list-group-item list-group-item-action">Alıntılar-Yorumlar</a> -->
         <a href="/contact" class="list-group-item list-group-item-action">İletişim</a>
         <!-- <a href="/games" class="list-group-item list-group-item-action">Oyunlar</a> -->
