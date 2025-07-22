@@ -2,6 +2,8 @@
 include 'auth/session.php';
 require_once __DIR__ . '/../config/db.php';
 
+echo "<!-- Organizasyon düzenleme sayfası -->";
+
 if (!isset($_SESSION['user_id'])) {
     header('Location: /login.php');
     exit;
