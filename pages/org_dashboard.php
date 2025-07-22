@@ -1,4 +1,9 @@
 <?php
+// Hataları görmek için geliştirme aşamasında aktif (yayında kapatılmalı)
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
 include './auth/session.php';
 include './config/db.php';
 
@@ -14,17 +19,22 @@ $error = '';
 
 // Organizasyona erişim yetkisi kontrolü
 $stmt = $conn->prepare("
-    SELECT o.* 
+    SELECT o.organization_id, o.organization_name, o.kep_address, o.phone 
     FROM organizations o
     JOIN user_organization uo ON uo.organization_id = o.organization_id
     WHERE uo.user_id = ? AND o.organization_id = ?
 ");
 $stmt->bind_param("ii", $user_id, $org_id);
 $stmt->execute();
-$result = $stmt->get_result();
+$stmt->bind_result($id, $name, $kep, $phone);
 
-if ($result->num_rows > 0) {
-    $organization = $result->fetch_assoc();
+if ($stmt->fetch()) {
+    $organization = [
+        'organization_id' => $id,
+        'organization_name' => $name,
+        'kep_address' => $kep,
+        'phone' => $phone
+    ];
 } else {
     $error = "Bu organizasyona erişim yetkiniz yok veya organizasyon bulunamadı.";
 }
@@ -56,3 +66,4 @@ $stmt->close();
 </div>
 </body>
 </html>
+
